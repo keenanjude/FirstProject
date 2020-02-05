@@ -4,9 +4,9 @@ lapply(x, library, character.only = TRUE)
 # 
 # 
 # #reading maps
-# library(readxl)
-# library(rgdal)
-# TorontoMap = readOGR(dsn = "data", layer="NEIGHBORHOODS_WGS84")
+library(readxl)
+library(rgdal)
+TorontoMap = readOGR(dsn = "data", layer="NEIGHBORHOODS_WGS84")
 # 
 # #generating data
 # EnviroData <- "./data/WB-Environment.xlsx"
