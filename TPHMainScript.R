@@ -32,6 +32,6 @@ TorontoMap@data <- left_join(TorontoMap@data, bigdf, by = c('FIELD_5' = 'Neighbo
 # #Plotting
 # library(tmap)
 plot(TorontoMap)
-plot(RoadMap$)
+plot(RoadMap)
 colnames(TorontoMap@data)[18] <- "Preg"
-qtm(TorontoMap, "DineSafe Inspections")
+qtm(TorontoMap, "Pollutants Released to Air")
