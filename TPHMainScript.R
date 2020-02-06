@@ -6,29 +6,32 @@ lapply(x, library, character.only = TRUE)
 # #reading maps
 library(readxl)
 library(rgdal)
-TorontoMap = readOGR(dsn = "data", layer="NEIGHBORHOODS_WGS84")
+TorontoMap = readOGR(dsn = "data/Neighbourhoods", layer="Neighbourhoods")
+RoadMap = readOGR(dsn ="data/TO_CenterLine", layer ="CENTRELINE_WGS84")
 # 
-# #generating data
-# EnviroData <- "./data/WB-Environment.xlsx"
-# HealthData <- "./data/WB-Health.xlsx"
-# EnviroSet <- read_excel(EnviroData, sheet = 3)
-# HealthSet <- read_excel(HealthData, sheet = 3, cell_rows(2:142))
+#generating data
+EnviroData <- "./data/wb_env.xlsx"
+HealthData <- "./data/wb_health.xlsx"
+SocialData <- "./data/social_housing_density.xlsx"
+EnviroSet <- read_excel(EnviroData, sheet = 3)
+HealthSet <- read_excel(HealthData, sheet = 3, cell_rows(2:142))
 # 
-# head(TorontoMap@data)
-# nrow(TorontoMap)
-# nrow(EnviroSet)
-# nrow(HealthSet)
+head(TorontoMap@data)
+nrow(TorontoMap)
+nrow(EnviroSet)
+nrow(HealthSet)
 # 
-# class(TorontoMap$AREA_S_CD)
-# TorontoMap$AREA_S_CD <- as.numeric(TorontoMap$AREA_S_CD)
-# class(EnviroSet$`Neighbourhood Id`)
+class(TorontoMap$FIELD_5)
+TorontoMap$FIELD_5 <- as.numeric(TorontoMap$FIELD_5)
+class(EnviroSet$`Neighbourhood Id`)
 # 
-# bigdf <- left_join(EnviroSet, HealthSet, by = c('Neighbourhood Id' = 'Neighbourhood Id'))
+bigdf <- left_join(EnviroSet, HealthSet, by = c('Neighbourhood Id' = 'Neighbourhood Id'))
 # 
-# TorontoMap@data <- left_join(TorontoMap@data, bigdf, by = c('AREA_S_CD' = 'Neighbourhood Id'))
+TorontoMap@data <- left_join(TorontoMap@data, bigdf, by = c('FIELD_5' = 'Neighbourhood Id'))
 # 
 # #Plotting
 # library(tmap)
-# plot(TorontoMap)
-# colnames(TorontoMap@data)[18] <- "Preg"
-# qtm(TorontoMap, "Green Rebate Programs")
+plot(TorontoMap)
+plot(RoadMap$)
+colnames(TorontoMap@data)[18] <- "Preg"
+qtm(TorontoMap, "DineSafe Inspections")
