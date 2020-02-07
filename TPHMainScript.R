@@ -26,6 +26,7 @@ TorontoMap$FIELD_5 <- as.numeric(TorontoMap$FIELD_5)
 class(EnviroSet$`Neighbourhood Id`)
 # 
 bigdf <- left_join(EnviroSet, HealthSet, by = c('Neighbourhood Id' = 'Neighbourhood Id'))
+bigdf <- left_join(bigdf, SocialData, by = c('Neighbourhood Id' = 'Neighbourhood'))
 # 
 TorontoMap@data <- left_join(TorontoMap@data, bigdf, by = c('FIELD_5' = 'Neighbourhood Id'))
 # 
