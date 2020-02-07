@@ -15,18 +15,20 @@ HealthData <- "./data/wb_health.xlsx"
 SocialData <- "./data/social_housing_density.xlsx"
 EnviroSet <- read_excel(EnviroData, sheet = 3)
 HealthSet <- read_excel(HealthData, sheet = 3, cell_rows(2:142))
+SocialSet <- read_excel(SocialData)
 # 
 head(TorontoMap@data)
 nrow(TorontoMap)
 nrow(EnviroSet)
 nrow(HealthSet)
+nrow(SocialSet)
 # 
 class(TorontoMap$FIELD_5)
 TorontoMap$FIELD_5 <- as.numeric(TorontoMap$FIELD_5)
 class(EnviroSet$`Neighbourhood Id`)
 # 
 bigdf <- left_join(EnviroSet, HealthSet, by = c('Neighbourhood Id' = 'Neighbourhood Id'))
-bigdf <- left_join(bigdf, SocialData, by = c('Neighbourhood Id' = 'Neighbourhood'))
+
 # 
 TorontoMap@data <- left_join(TorontoMap@data, bigdf, by = c('FIELD_5' = 'Neighbourhood Id'))
 # 
